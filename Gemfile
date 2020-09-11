@@ -77,3 +77,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rails-controller-testing'
 end
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]
