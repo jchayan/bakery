@@ -4,13 +4,12 @@
   Cookie in oven:
   - if @oven.cookie
     1 cookie with #{show_cookie_filling(@oven.cookie)}
-    .cookie-status
-      - if @oven.cookie.ready?
-        = render 'ovens/cookie.ready'
+    - if @oven.cookie.ready?
+      (Your Cookie is Ready)
+      = button_to "Retrieve Cookie", empty_oven_path, class: 'button tiny'
   - else
     None
 
 %br
 
 = link_to "Prepare Cookie", new_oven_cookies_path(@oven), class: 'button'
-= javascript_include_tag "ovens/show"
