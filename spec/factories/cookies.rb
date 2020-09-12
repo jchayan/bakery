@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :cookie, :class => 'Cookie' do
     association :storage, factory: :oven
     fillings "MyString"
+    ready false
   end
 end
