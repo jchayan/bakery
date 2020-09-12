@@ -117,4 +117,22 @@ describe OvensController do
     end
 
   end
+
+  describe 'GET progress' do
+    context "when not authenticated" do
+      before { sign_in nil }
+
+      it "blocks access" do
+        the_request
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "when authenticated" do
+      before { get :progress }
+      it { expect(response.headers['Content-Type']).to eq("text/event-stream") }
+      after {response.stream.close unless response.stream.closed? }
+    end
+  end
+
 end
