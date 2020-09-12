@@ -79,3 +79,7 @@ group :test do
 end
 
 gem "byebug", "~> 11.1", :groups => [:development, :test]
+
+gem "sidekiq", "~> 5.2"
+
+gem "rspec-wait", "~> 0.0.9", :groups => [:development, :test]
