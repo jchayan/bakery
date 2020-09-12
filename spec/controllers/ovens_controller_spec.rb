@@ -119,6 +119,8 @@ describe OvensController do
   end
 
   describe 'GET progress' do
+    let(:the_request) { get :progress }
+
     context "when not authenticated" do
       before { sign_in nil }
 
@@ -129,7 +131,6 @@ describe OvensController do
     end
 
     context "when authenticated" do
-      before { get :progress }
       it { expect(response.headers['Content-Type']).to eq("text/event-stream") }
       after {response.stream.close unless response.stream.closed? }
     end
