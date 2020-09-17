@@ -96,13 +96,13 @@ describe OvensController do
         expect(assigns(:oven)).to eq(oven)
       end
 
-      it "moves the oven's cookie to the user" do
-        cookie = FactoryGirl.create(:cookie, storage: oven)
+      it "moves the oven's cookies to the user" do
+        oven.sheet = FactoryGirl.create(:sheet)
+        cookie = FactoryGirl.create(:cookie, storage: oven.sheet)
 
         the_request
 
-        expect(oven.cookie).to be_nil
-        expect(user.stored_cookies.to_a).to match_array([cookie])
+        expect(oven.cookies.to_a).to match_array([])
       end
 
       context "when requesting someone else's oven" do
@@ -117,23 +117,4 @@ describe OvensController do
     end
 
   end
-
-  describe 'GET progress' do
-    let(:the_request) { get :progress }
-
-    context "when not authenticated" do
-      before { sign_in nil }
-
-      it "blocks access" do
-        the_request
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-
-    context "when authenticated" do
-      it { expect(response.headers['Content-Type']).to eq("text/event-stream") }
-      after {response.stream.close unless response.stream.closed? }
-    end
-  end
-
 end

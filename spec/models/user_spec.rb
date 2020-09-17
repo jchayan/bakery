@@ -5,7 +5,7 @@ describe User do
 
   describe "associations" do
     it { is_expected.to have_many(:ovens) }
-    it { is_expected.to have_many(:stored_cookies) }
+    it { is_expected.to have_many(:cookies) }
   end
 
   describe "validations" do

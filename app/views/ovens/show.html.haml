@@ -2,15 +2,16 @@
 
 .cookie-info
   Cookie in oven:
-  - if @oven.cookie
-    1 cookie with #{show_cookie_filling(@oven.cookie)}
-    .cookie-status
-      - if @oven.cookie.ready?
-        = render 'ovens/cookie.ready'
+  %br
+  - if @cookies.present?
+    = show_cookies(@cookies)
+    .status
+      - if @sheet.ready?
+        = render 'ovens/sheet.ready'
   - else
     None
 
 %br
 
-= link_to "Prepare Cookie", new_oven_cookies_path(@oven), class: 'button'
+= link_to "Prepare Cookie", new_oven_sheet_path(@oven), class: 'button'
 = javascript_include_tag "ovens/show"

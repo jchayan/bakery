@@ -10,11 +10,4 @@ describe Cookie do
   describe "validations" do
     it { is_expected.to validate_presence_of(:storage) }
   end
-
-  describe ".cook!" do
-    it "should set ready field to true" do
-      subject.cook!
-      expect(subject.ready).to eq(true)
-    end
-  end
 end

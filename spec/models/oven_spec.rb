@@ -9,12 +9,13 @@ describe Oven do
   subject { FactoryGirl.create(:oven) }
 
   before do
-    subject.cookie = FactoryGirl.create(:cookie)
+    subject.sheet = FactoryGirl.create(:sheet)
+    subject.sheet.cookies << FactoryGirl.create(:cookie)
   end
 
   describe "associations" do
     it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_one(:cookie) }
+    it { is_expected.to have_one(:sheet) }
   end
 
   describe "validations" do
