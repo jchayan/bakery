@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -5,7 +7,9 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root to: 'store#index', as: :store_root
+    mount Sidekiq::Web => '/sidekiq'
   end
+  get '/sidekiq' => redirect('/')
 
   root to: 'visitors#index'
 
