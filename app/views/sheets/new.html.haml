@@ -1,0 +1,20 @@
+%h3 New sheet with cookies for oven '#{@oven.name}'
+
+= form_for @sheet, url: { action: 'create' } do |f|
+  = f.fields_for :cookie do |cookies_form|
+    .row
+      .small-8.columns
+        = cookies_form.label :fillings
+    .row
+      .small-8.columns
+        = cookies_form.text_field :fillings
+
+  .row
+    .small-8.columns
+      = label_tag :quantity, 'Quantity'
+  .row
+    .small-8.columns
+      = number_field_tag :quantity
+  .row
+    .small-8.columns
+      = f.submit 'Mix and bake', class: 'button'

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :ovens do
-    resource :cookies
+    resource :sheet
     member do
       get :progress
       post :empty

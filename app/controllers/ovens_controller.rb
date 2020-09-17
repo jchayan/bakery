@@ -12,13 +12,22 @@ class OvensController < ApplicationController
 
   def show
     @oven = find_user_oven
+    @sheet = @oven.sheet
+    @cookies = Cookie.in_sheet(@sheet.id).by_fillings if @sheet.present?
   end
 
   def empty
     @oven = find_user_oven
-    if @oven.cookie
-      @oven.cookie.update_attributes!(storage: current_user)
-    end
+    cookies = @oven.cookies
+
+    return redirect_to @oven, alert: 'Oven already empty!' if cookies.empty?
+
+    @oven.sheet = nil
+    cookies.each { |cookie| cookie.update_attributes!(storage: current_user) }
+
+    current_user.save!
+    @oven.save!
+
     redirect_to @oven, alert: 'Oven emptied!'
   end
 
@@ -26,17 +35,17 @@ class OvensController < ApplicationController
     sse = SSE.new(response.stream)
     response.headers['Content-Type'] = 'text/event-stream'
 
-    @oven = find_user_oven
+    oven = find_user_oven
 
-    return sse.close if @oven.cookie.blank?
-    return sse.close unless @oven.cookie.ready?
+    return sse.close if oven.sheet.blank?
+    return sse.close unless oven.sheet.ready?
 
-    template = render_to_string(partial: 'cookie.ready', formats: [:html])
+    template = render_to_string(partial: 'sheet.ready', formats: [:html])
     sse.write(template, retry: SSE_RETRY_TIME)
   rescue => error
     Rails.logger.error(error)
   ensure
-    sse.close
+    sse.close if sse.present?
   end
 
   private
