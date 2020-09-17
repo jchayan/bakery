@@ -7,7 +7,7 @@ We don't mass produce our cookies in faceless factories. Instead, We bake cookie
 
 Reference Application
 ---------------------
-A reference application can be found at [http://flowspace-bakery.herokuapp.com](http://flowspace-bakery.herokuapp.com)
+A reference application can be found at [https://polar-stream-01531.herokuapp.com](https://polar-stream-01531.herokuapp.com)
 
 HTTP Auth access: bake / somecookies
 
