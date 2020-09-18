@@ -21,7 +21,7 @@ $(document).on 'DOMContentLoaded', ->
 
   this.loaded = true
   ovenId = location.pathname.split('/').pop()
-  cookieStatus = document.querySelector('.cookie-info > .status')
+  cookieStatus = document.querySelector('#cookie-info > .status')
   eventSource = new EventSource('/ovens/' + ovenId + '/progress')
   eventSource.addEventListener 'message', (event) ->
     cookieStatus.innerHTML = event.data

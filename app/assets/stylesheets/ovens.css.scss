@@ -1,3 +1,40 @@
 // Place all the styles related to the ovens controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import './variables';
+
+main {
+    display: flex;
+    align-items: none;
+    flex-direction: column;
+    text-align: center;
+
+    #prepare-button {
+      order: 0;
+    }
+    #oven-name {
+      order: 1;
+    }
+    #cookie-info {
+      order: 2;
+    }
+}
+
+
+@media only screen and (min-width: $mobile-breakpoint) {
+  main {
+    text-align: left;
+    align-items: flex-start;
+
+    #oven-name {
+      order: 0;
+    }
+    #cookie-info {
+      order: 1;
+      margin-bottom: 30px;
+    }
+    #prepare-button {
+      order: 2;
+    }
+  }
+}
