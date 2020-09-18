@@ -1,7 +1,7 @@
-%h3= @oven.name
+%h3#oven-name= @oven.name
 
-.cookie-info
-  Cookie in oven:
+#cookie-info
+  Cookies in oven:
   %br
   - if @cookies.present?
     = show_cookies(@cookies)
@@ -13,5 +13,5 @@
 
 %br
 
-= link_to "Prepare Cookie", new_oven_sheet_path(@oven), class: 'button'
+= link_to "Prepare Cookie", new_oven_sheet_path(@oven), class: 'button', id: 'prepare-button'
 = javascript_include_tag "ovens/show"
