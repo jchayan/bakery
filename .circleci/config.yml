@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/flowspace-bakery
     docker:
-      - image: ruby:2.6.2
+      - image: jchayan/ruby-node:main
         environment:
           DATABASE_URL: postgresql://ubuntu@localhost/flowspace-bakery_test?sslmode=disable
           RAILS_ENV: test
@@ -20,10 +20,8 @@ jobs:
           - flowspace-bakery-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           - flowspace-bakery-master-{{ checksum "Gemfile.lock" }}
       - run:
-          name: install nodejs and npm
-          command: |
-            curl -sSL "https://nodejs.org/dist/v12.18.4/node-v12.18.4-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
-            curl https://www.npmjs.com/install.sh | sudo bash
+          name: install npm
+          command: curl https://www.npmjs.com/install.sh | bash
       - run:
           name: bundle install
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
