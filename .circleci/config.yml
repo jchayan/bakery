@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/tanookie-bakery
     docker:
-      - image: ruby:2.3.3
+      - image: ruby:2.6.2
         environment:
           DATABASE_URL: postgresql://ubuntu@localhost/tanookie-bakery_test?sslmode=disable
           RAILS_ENV: test
